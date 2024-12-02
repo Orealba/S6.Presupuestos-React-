@@ -1,0 +1,11 @@
+.card-component {
+  height: 10rem;
+  width: 60rem;
+  margin-left: 10rem;
+}
+.card-component-price {
+  padding-left: 8rem;
+}
+.card-component-checkbox {
+  padding-left: 15rem;
+}
