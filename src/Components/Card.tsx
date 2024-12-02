@@ -2,7 +2,7 @@ import '../Components/styles/Card.css';
 
 export const Card = () => {
   return (
-    <div className=" mt-8 text-left bg-white border border-gray-200 rounded-lg shadow sm:p-6 card-component">
+    <div className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component">
       <h5 className="mb-2 text-3xl font-bold text-gray-900 ">Seo</h5>
       <div className="row flex d-flex">
         <div className="col-md-4 ">
@@ -24,8 +24,8 @@ export const Card = () => {
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
-            for="default-checkbox"
-            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            htmlFor="default-checkbox"
+            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
             Añadir
           </label>
         </div>
