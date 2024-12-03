@@ -1,6 +1,6 @@
 import '../Components/styles/Card.css';
-import { ChangeEvent, useState } from 'react';
-
+import { ChangeEvent, useContext, useState } from 'react';
+import {TotalContext} from '../Context/TotalProvider'
 type CardsProps = {
   title: string;
   text: string;
@@ -8,10 +8,14 @@ type CardsProps = {
 };
 export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
   const [checkboxState, setCheckboxState] = useState<boolean>(false);
+  const [precioTotal, setPrecioTotal] = useContext(TotalContext);
+
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.checked);
     setCheckboxState(e.target.checked);
   };
+
   return (
     <div
       onSubmit={(e) => e.preventDefault()}
