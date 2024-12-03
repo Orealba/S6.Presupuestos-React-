@@ -8,6 +8,7 @@ import PrecioTotal from './Components/precioTotal';
 function App() {
   return (
     <>
+    
       <Navbar></Navbar>
       <HeaderBox></HeaderBox>
       <Cards></Cards>

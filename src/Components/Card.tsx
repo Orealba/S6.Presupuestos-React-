@@ -1,4 +1,5 @@
 import '../Components/styles/Card.css';
+import { ChangeEvent, useState } from 'react';
 
 type CardsProps = {
   title: string;
@@ -6,8 +7,15 @@ type CardsProps = {
   price: number;
 };
 export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
+  const [checkboxState, setCheckboxState] = useState<boolean>(false);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked);
+    setCheckboxState(e.target.checked);
+  };
   return (
-    <div className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component ">
+    <div
+      onSubmit={(e) => e.preventDefault()}
+      className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component ">
       <h5 className="mb-2 text-3xl font-bold text-gray-900 ">{title}</h5>
       <div className="flex d-flex">
         <div>
@@ -20,12 +28,14 @@ export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
             {price}€
           </p>
         </div>
+        {/* checkboxes */}
         <div className=" flex items-center mb-10 pl-8 card-component-checkbox">
           <input
             id="default-checkbox"
             type="checkbox"
-            value=""
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
+            value={checkboxState}
+            onChange={handleChange}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded "
           />
           <label
             htmlFor="default-checkbox"
