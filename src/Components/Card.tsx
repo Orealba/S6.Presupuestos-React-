@@ -1,6 +1,6 @@
 import '../Components/styles/Card.css';
 import { ChangeEvent, useContext, useState } from 'react';
-import {TotalContext} from '../Context/TotalProvider'
+import { TotalContext } from '../Context/TotalProvider';
 type CardsProps = {
   title: string;
   text: string;
@@ -8,17 +8,28 @@ type CardsProps = {
 };
 export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
   const [checkboxState, setCheckboxState] = useState<boolean>(false);
-  const [precioTotal, setPrecioTotal] = useContext(TotalContext);
+  const totalContext = useContext(TotalContext);
+  // me quedé aqui
 
+  if (!totalContext) {
+    throw new Error('Card debe estar de un TotalProvider');
+  }
+  const { total, setTotal } = totalContext;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
-    setCheckboxState(e.target.checked);
+    const isChecked = e.target.checked;
+    setCheckboxState(isChecked);
+    if (isChecked){
+        setTotal((prevTotal)=> prevTotal + price);
+    }else {
+        setTotal((prevtTotal)=> prevtTotal - price );
+    }
+
   };
 
   return (
     <div
-      onSubmit={(e) => e.preventDefault()}
+      
       className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component ">
       <h5 className="mb-2 text-3xl font-bold text-gray-900 ">{title}</h5>
       <div className="flex d-flex">
@@ -37,7 +48,7 @@ export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
           <input
             id="default-checkbox"
             type="checkbox"
-            value={checkboxState}
+            checked={checkboxState}
             onChange={handleChange}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded "
           />
