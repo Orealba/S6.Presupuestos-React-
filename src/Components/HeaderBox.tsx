@@ -5,7 +5,7 @@ const HeaderBox = () => {
   return (
     <div>
       <div
-        className="bg-white border border-gray-200 rounded-lg shadow header-box-styles"
+        className="bg-white border border-gray-200 rounded-lg shadow mt-10 header-box-styles "
         style={{
           backgroundImage: `url(${background})`,
         }}>

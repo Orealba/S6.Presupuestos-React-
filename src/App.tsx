@@ -1,18 +1,20 @@
 import './App.css';
-import Cards from './Components/Cards';
-import HeaderBox from './Components/HeaderBox';
-import Navbar from './Components/Navbar';
-import PrecioTotal from './Components/PrecioTotal';
-import TotalProvider from './Context/TotalProvider';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './Pages/Home';
+import { Calculator } from './Pages/Calculator';
 
 function App() {
   return (
-    <TotalProvider>
-      <Navbar></Navbar>
-      <HeaderBox></HeaderBox>
-      <Cards></Cards>
-      <PrecioTotal></PrecioTotal>
-    </TotalProvider>
+    <Routes>
+      <Route
+        path="/"
+        element={<Home />}
+      />
+      <Route
+        path="presupuestos"
+        element={<Calculator />}
+      />
+    </Routes>
   );
 }
 

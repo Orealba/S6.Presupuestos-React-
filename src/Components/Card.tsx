@@ -9,7 +9,7 @@ type CardsProps = {
 export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
   const [checkboxState, setCheckboxState] = useState<boolean>(false);
   const totalContext = useContext(TotalContext);
-  // me quedé aqui
+ 
 
   if (!totalContext) {
     throw new Error('Card debe estar de un TotalProvider');
@@ -19,18 +19,15 @@ export const Card: React.FC<CardsProps> = ({ title, text, price }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setCheckboxState(isChecked);
-    if (isChecked){
-        setTotal((prevTotal)=> prevTotal + price);
-    }else {
-        setTotal((prevtTotal)=> prevtTotal - price );
+    if (isChecked) {
+      setTotal((prevTotal) => prevTotal + price);
+    } else {
+      setTotal((prevtTotal) => prevtTotal - price);
     }
-
   };
 
   return (
-    <div
-      
-      className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component ">
+    <div className=" mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl sm:p-6  card-component ">
       <h5 className="mb-2 text-3xl font-bold text-gray-900 ">{title}</h5>
       <div className="flex d-flex">
         <div>
