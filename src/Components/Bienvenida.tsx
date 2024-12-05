@@ -15,7 +15,7 @@ const Bienvenida = () => {
         backgroundImage: `url(${background})`,
       }}>
       <div className="bg-white/80 p-8 mt-8 rounded-lg shadow-lg text-center">
-        <h1 className="text-7xl font-bold text-gray-800 mb-4">Bienvenidos</h1>
+        <h1 className="text-5xl font-bold text-gray-800 mb-4">Bienvenidos</h1>
         <h2 className="text-gray-700 mb-8 mt-8 font-bold text-2xl">
           Aquí podrás hacer los cálculos para el presupuesto de un sitio web de
           tu preferencia.

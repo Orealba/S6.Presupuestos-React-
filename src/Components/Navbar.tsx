@@ -9,14 +9,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-name flex justify-between items-center w-full px-4   py-2">
+    <div className="navbar-name flex justify-between items-center w-full px-4   py-2 container">
       <h1 className="app-namePage text-gray-900 text-sm font-bold">
         Frontender.itacademy
       </h1>
       <button
         onClick={handleHomeNavigation}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg font-medium shadow hover:bg-blue-600 ml-auto">
-        Ir a Home
+        className="bg-red-400 px-4 font-bold text-gray-800  py-2 rounded-lg  shadow mt-3 mr-5">
+        Home
       </button>
     </div>
   );
