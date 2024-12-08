@@ -3,6 +3,8 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { TotalContext } from '../Context/TotalProvider';
 import { InputNumber } from './InputNumber';
 
+//agarra el total de las page y lenguajes y ponlo aparte, poara luego agarrar el usecontext del total y cuando calcules lo del lenguaje y pages, le sumes el useContext
+
 type CardsProps = {
   id: number;
   title: string;
@@ -20,16 +22,19 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   const [pages, setPages] = useState<number>(0);
   const [languages, setLanguages] = useState<number>(0);
   const totalContext = useContext(TotalContext);
+
   if (!totalContext) {
     throw new Error('Card debe estar dentro de un TotalProvider');
   }
   const { total, setTotal } = totalContext;
+
   const calculateAdditionalCost = (pages: number, languages: number) => {
     return (pages + languages) * 30;
   };
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setCheckboxState(isChecked);
+
     if (isChecked) {
       setTotal((prevTotal) => prevTotal + price);
     } else {
@@ -41,16 +46,19 @@ export const Card: React.FunctionComponent<CardsProps> = ({
     const previousAdditionalCost = calculateAdditionalCost(pages, languages);
     setPages(value);
     const newAdditionalCost = calculateAdditionalCost(value, languages);
+
     if (checkboxState) {
       setTotal(
         (prevTotal) => prevTotal - previousAdditionalCost + newAdditionalCost,
       );
     }
   };
+
   const handleLanguagesChange = (value: number) => {
     const previousAdditionalCost = calculateAdditionalCost(pages, languages);
     setLanguages(value);
     const newAdditionalCost = calculateAdditionalCost(pages, value);
+
     if (checkboxState) {
       setTotal(
         (prevTotal) => prevTotal - previousAdditionalCost + newAdditionalCost,
