@@ -25,7 +25,7 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   if (!totalContext) {
     throw new Error('Card debe estar dentro de un TotalProvider');
   }
-  const { total, setTotal } = totalContext;
+  const { total, setTotal, selectedCards, setSelectedCards } = totalContext;
 
   // Calcula el costo adicional cada vez que cambian páginas o lenguajes
   useEffect(() => {
@@ -44,8 +44,12 @@ export const Card: React.FunctionComponent<CardsProps> = ({
 
     if (isChecked) {
       setTotal((prevTotal) => prevTotal + price + additionalCost);
+      setSelectedCards((prevCards) => [...prevCards, { id, title, price }]);
     } else {
       setTotal((prevTotal) => prevTotal - (price + additionalCost));
+      setSelectedCards((prevCards) =>
+        prevCards.filter((card) => card.id !== id),
+      );
     }
   };
 
