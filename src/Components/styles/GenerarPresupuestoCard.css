@@ -1,8 +1,19 @@
 .generar-presupuestos-box-styles {
   justify-self: center;
   margin-top: 2rem;
-  max-width: 43rem;
+  max-width: 44rem;
 }
-.generar-presupuestos-box-styles-form {
+.generar-presupuestos-box-styles-title {
+  text-align: start;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.generar-presupuestos-box-styles-form-divs {
+  margin: 2rem 0rem 2rem 1rem;
+}
+.generar-presupuestos-box-styles-button {
+  height: 3rem;
+  width: 20rem;
   margin: 1rem;
 }

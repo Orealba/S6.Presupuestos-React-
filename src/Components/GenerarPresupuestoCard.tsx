@@ -2,72 +2,52 @@ import './styles/GenerarPresupuestoCard.css';
 
 function GenerarPresupuestoCard() {
   return (
-    <div className="container  block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 generar-presupuestos-box-styles">
-     
-        <form className="max-w-sm mx-auto flex d-flex generar-presupuestos-box-styles-form">
-          <div className="m-3 ">
-            <label
-              for="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Nombre
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name@flowbite.com"
-              required
-            />
-          </div>
-          <div className="m-3">
-            <label
-              for="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Teléfono
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-5">
-            <label
-              for="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Mail
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-          <div className="flex items-start mb-5">
-            <div className="flex items-center h-5">
-              <input
-                id="remember"
-                type="checkbox"
-                value=""
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                required
-              />
-            </div>
-            <label
-              for="remember"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Remember me
-            </label>
-          </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Submit
-          </button>
-        </form>
-      
+    <div className="container   bg-white border border-gray-200 rounded-lg shadow-xl generar-presupuestos-box-styles">
+      <h4 className="text-gray-900  font-bold text-xl generar-presupuestos-box-styles-title">Solicitar presupuesto</h4>
+      <form className="  items-center mx-auto flex d-flex generar-presupuestos-box-styles-form">
+        <div className="  generar-presupuestos-box-styles-form-divs">
+          <label
+            htmlFor="nombre"
+            className="block  text-sm font-medium text-gray-900 dark:text-white"></label>
+          <input
+            type="nombre"
+            id="nombre"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2 mr-5"
+            placeholder="Nombre"
+            required
+          />
+        </div>
+        <div className=" generar-presupuestos-box-styles-form-divs">
+          <label
+            htmlFor="telefono"
+            className="block  text-sm font-medium text-gray-900 dark:text-white"></label>
+          <input
+            type="telefono"
+            id="telefono"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2 mr-3"
+            placeholder="Teléfono"
+            required
+          />
+        </div>
+        <div className=" generar-presupuestos-box-styles-form-divs">
+          <label
+            htmlFor="email"
+            className="block  text-sm font-medium text-gray-900 dark:text-white"></label>
+          <input
+            type="email"
+            id="email"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full "
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-green-400 text-sm font-bold text-white   shadow  generar-presupuestos-box-styles-button">
+          Solicitar presupuesto →
+        </button>
+      </form>
     </div>
   );
 }
