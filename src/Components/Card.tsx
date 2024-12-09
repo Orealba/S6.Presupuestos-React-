@@ -1,9 +1,7 @@
 import '../Components/styles/Card.css';
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useState, useEffect } from 'react';
 import { TotalContext } from '../Context/TotalProvider';
 import { InputNumber } from './InputNumber';
-
-//agarra el total de las page y lenguajes y ponlo aparte, poara luego agarrar el usecontext del total y cuando calcules lo del lenguaje y pages, le sumes el useContext
 
 type CardsProps = {
   id: number;
@@ -21,6 +19,7 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   const [checkboxState, setCheckboxState] = useState<boolean>(false);
   const [pages, setPages] = useState<number>(0);
   const [languages, setLanguages] = useState<number>(0);
+  const [additionalCost, setAdditionalCost] = useState<number>(0); // Estado para el costo adicional
   const totalContext = useContext(TotalContext);
 
   if (!totalContext) {
@@ -28,43 +27,36 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   }
   const { total, setTotal } = totalContext;
 
-  const calculateAdditionalCost = (pages: number, languages: number) => {
-    return (pages + languages) * 30;
-  };
+  // Calcula el costo adicional cada vez que cambian páginas o lenguajes
+  useEffect(() => {
+    const newAdditionalCost = (pages + languages) * 30;
+    setAdditionalCost(newAdditionalCost);
+
+    // Si el checkbox está activo, actualiza el total general
+    if (checkboxState) {
+      setTotal((prevTotal) => prevTotal + newAdditionalCost - additionalCost);
+    }
+  }, [pages, languages]);
+
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setCheckboxState(isChecked);
 
     if (isChecked) {
-      setTotal((prevTotal) => prevTotal + price);
+      setTotal((prevTotal) => prevTotal + price + additionalCost);
     } else {
-      const additionalCost = calculateAdditionalCost(pages, languages);
       setTotal((prevTotal) => prevTotal - (price + additionalCost));
     }
   };
-  const handlePagesChange = (value: number) => {
-    const previousAdditionalCost = calculateAdditionalCost(pages, languages);
-    setPages(value);
-    const newAdditionalCost = calculateAdditionalCost(value, languages);
 
-    if (checkboxState) {
-      setTotal(
-        (prevTotal) => prevTotal - previousAdditionalCost + newAdditionalCost,
-      );
-    }
+  const handlePagesChange = (value: number) => {
+    setPages(value); // Actualiza páginas
   };
 
   const handleLanguagesChange = (value: number) => {
-    const previousAdditionalCost = calculateAdditionalCost(pages, languages);
-    setLanguages(value);
-    const newAdditionalCost = calculateAdditionalCost(pages, value);
-
-    if (checkboxState) {
-      setTotal(
-        (prevTotal) => prevTotal - previousAdditionalCost + newAdditionalCost,
-      );
-    }
+    setLanguages(value); // Actualiza lenguajes
   };
+
   return (
     <div className="mt-8 text-left bg-white border border-gray-200 rounded-xl shadow-xl p-6">
       <h5 className="mb-2 text-3xl font-bold text-gray-900">{title}</h5>
