@@ -1,0 +1,20 @@
+.DatosPresupuestoCard-styles-title {
+  text-align: start;
+  margin-left: 16.5rem;
+  margin-top: 3rem;
+}
+.DatosPresupuestoCard-styles {
+  margin-top: 1rem;
+  max-width: 44rem;
+  height: 10rem;
+  display: flex;
+  justify-content: start;
+  margin-left: 16.5rem;
+  padding: 2rem 0rem 0rem 2rem;
+}
+.DatosPresupuestoCard-styles-primerDiv{
+margin-right: 2rem;
+}
+.DatosPresupuestoCard-styles-segundoDiv{
+  margin-left: 6rem;
+}

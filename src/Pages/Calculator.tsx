@@ -1,4 +1,3 @@
-
 import Cards from '../Components/Cards';
 import DatosPresupuestoCard from '../Components/DatosPresupuestoCard';
 import GenerarPresupuestoCard from '../Components/GenerarPresupuestoCard';
@@ -6,8 +5,14 @@ import HeaderBox from '../Components/HeaderBox';
 import Navbar from '../Components/Navbar';
 import PrecioTotal from '../Components/PrecioTotal';
 import TotalProvider from '../Context/TotalProvider';
+import { useState } from 'react';
 
 export const Calculator = () => {
+  const [formData, setFormData] = useState<{
+    nombre: string;
+    telefono: string;
+    email: string;
+  } | null>(null);
 
   const handleSubmitPresupuesto = (data: {
     nombre: string;
@@ -15,7 +20,7 @@ export const Calculator = () => {
     email: string;
   }) => {
     console.log('Datos del presupuesto:', data);
-    
+    setFormData(data);
   };
 
   return (
@@ -27,7 +32,8 @@ export const Calculator = () => {
         <PrecioTotal />
 
         <GenerarPresupuestoCard onSubmitPresupuesto={handleSubmitPresupuesto} />
-        <DatosPresupuestoCard />
+        {formData && <DatosPresupuestoCard formData={formData} />}
+        
       </TotalProvider>
     </>
   );
