@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Modal } from 'flowbite';
+import { useState, useRef, useEffect } from 'react';
 
 interface InfoIconProps {
   modalId: string;
@@ -12,74 +11,65 @@ export const InfoIcon: React.FC<InfoIconProps> = ({
   title,
   description,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    // Inicializar el modal
-    const $targetEl = document.getElementById(modalId);
-    const $triggerEl = document.querySelector(
-      `[data-modal-target="${modalId}"]`,
-    );
-    const $closeEl = document.querySelector(`[data-modal-hide="${modalId}"]`);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isOpen) return;
 
-    if ($targetEl) {
-      const modal = new Modal($targetEl, {
-        backdrop: 'dynamic',
-        closable: true,
-      });
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
 
-      // Abrir modal al hacer clic en el trigger
-      $triggerEl?.addEventListener('click', () => modal.show());
-
-      // Cerrar modal al hacer clic en el botón de cerrar
-      $closeEl?.addEventListener('click', () => modal.hide());
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      modalRef.current?.focus();
+    } else {
+      document.removeEventListener('keydown', handleKeyDown);
+      triggerRef.current?.focus();
     }
-  }, [modalId]);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   return (
     <>
       <button
-        data-modal-target={modalId}
+        ref={triggerRef}
+        onClick={() => setIsOpen(true)}
         type="button"
-        className="flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium text-white bg-gray-700 rounded-full hover:bg-gray-600 dark:hover:bg-gray-500 focus:outline-none">
+        aria-label="Más información"
+        className="flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium text-white bg-gray-700 rounded-full hover:bg-gray-600 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
         i
       </button>
 
-      <div
-        id={modalId}
-        tabIndex={-1}
-        aria-hidden="true"
-        className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div className="relative p-4 w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                {title}
-              </h3>
-              <button
-                type="button"
-                data-modal-hide={modalId}
-                className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14">
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="p-4 md:p-5">
-              <p className="text-gray-500 dark:text-gray-400">{description}</p>
-            </div>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20"
+          onClick={() => setIsOpen(false)}
+          role="presentation">
+          <div
+            ref={modalRef}
+            role="dialog"
+            aria-labelledby={`${modalId}-title`}
+            aria-modal="true"
+            className="relative bg-white rounded-lg border border-gray-200 shadow-lg max-w-md w-full mx-4 p-6 focus:outline-none"
+            onClick={(e) => e.stopPropagation()}
+            tabIndex={-1}>
+            <h3
+              id={`${modalId}-title`}
+              className="text-xl font-bold text-gray-900 mb-2">
+              {title}
+            </h3>
+            <p className="text-gray-600">{description}</p>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
