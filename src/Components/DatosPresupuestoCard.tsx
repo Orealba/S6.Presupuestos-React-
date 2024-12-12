@@ -18,7 +18,7 @@ function DatosPresupuestoCard({
   const { savedPresupuestos } = totalContext;
 
   if (!savedPresupuestos || savedPresupuestos.length === 0) {
-    return null; // No renderizar nada si no hay presupuestos
+    return null;
   }
   return (
     <div className="container">
@@ -51,10 +51,8 @@ function DatosPresupuestoCard({
                         key={card.id}
                         className="text-gray-700">
                         {card.title === 'Web'
-                          ? // Para Web, mostrar páginas y lenguajes sin el precio
-                            `Web (${presupuesto.paginas} páginas, ${presupuesto.lenguajes} lenguajes)`
-                          : // Para otros servicios, solo el título
-                            card.title}
+                          ? `Web (${presupuesto.paginas} páginas, ${presupuesto.lenguajes} lenguajes)`
+                          : card.title}
                       </li>
                     ))}
                   </ul>

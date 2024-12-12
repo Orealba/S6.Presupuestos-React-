@@ -19,7 +19,6 @@ export const Calculator = () => {
     telefono: string;
     email: string;
   }) => {
-    console.log('Datos del presupuesto:', data);
     setFormData(data);
   };
 
@@ -33,7 +32,6 @@ export const Calculator = () => {
 
         <GenerarPresupuestoCard onSubmitPresupuesto={handleSubmitPresupuesto} />
         {formData && <DatosPresupuestoCard formData={formData} />}
-        
       </TotalProvider>
     </>
   );

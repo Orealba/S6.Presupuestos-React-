@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       spacing: {
-        '90rem': '90rem', // Define un ancho personalizado.
-        '10rem': '10rem', // Define una altura personalizada.
+        '90rem': '90rem',
+        '10rem': '10rem', 
       },
     },
   },

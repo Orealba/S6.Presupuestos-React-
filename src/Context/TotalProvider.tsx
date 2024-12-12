@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode, useState, useContext } from 'react';
 
-// Tipo del contexto
 type CardType = {
   id: number;
   title: string;
@@ -20,8 +19,8 @@ type PresupuestoData = {
   };
   selectedCards: CardType[];
   total: number;
-  paginas: number; // Nuevo
-  lenguajes: number; // Nuevo
+  paginas: number;
+  lenguajes: number;
 };
 
 type TotalContextType = {
@@ -31,28 +30,26 @@ type TotalContextType = {
   setSelectedCards: React.Dispatch<React.SetStateAction<CardType[]>>;
   savedPresupuestos: PresupuestoData[];
   savePresupuesto: (presupuesto: PresupuestoData) => void;
-  paginas: number; // Nuevo
-  lenguajes: number; // Nuevo
-  setPaginas: React.Dispatch<React.SetStateAction<number>>; // Nuevo
-  setLenguajes: React.Dispatch<React.SetStateAction<number>>; // Nuevo
+  paginas: number;
+  lenguajes: number;
+  setPaginas: React.Dispatch<React.SetStateAction<number>>;
+  setLenguajes: React.Dispatch<React.SetStateAction<number>>;
 };
 
-// Creación del contexto
 export const TotalContext = createContext<TotalContextType | null>(null);
 
 type TotalProviderProps = {
   children: ReactNode;
 };
 
-// Proveedor del contexto
 const TotalProvider: React.FC<TotalProviderProps> = ({ children }) => {
   const [total, setTotal] = useState<number>(0);
   const [selectedCards, setSelectedCards] = useState<CardType[]>([]);
   const [savedPresupuestos, setSavedPresupuestos] = useState<PresupuestoData[]>(
     [],
   );
-  const [paginas, setPaginas] = useState<number>(0); // Nuevo
-  const [lenguajes, setLenguajes] = useState<number>(0); // Nuevo
+  const [paginas, setPaginas] = useState<number>(0);
+  const [lenguajes, setLenguajes] = useState<number>(0);
 
   const savePresupuesto = (presupuesto: PresupuestoData) => {
     setSavedPresupuestos([...savedPresupuestos, presupuesto]);
@@ -67,17 +64,16 @@ const TotalProvider: React.FC<TotalProviderProps> = ({ children }) => {
         setSelectedCards,
         savedPresupuestos,
         savePresupuesto,
-        paginas, // Nuevo
-        lenguajes, // Nuevo
-        setPaginas, // Nuevo
-        setLenguajes, // Nuevo
+        paginas,
+        lenguajes,
+        setPaginas,
+        setLenguajes,
       }}>
       {children}
     </TotalContext.Provider>
   );
 };
 
-// Hook personalizado para usar el contexto
 export const useTotal = (): TotalContextType => {
   const context = useContext(TotalContext);
   if (!context) {

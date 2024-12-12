@@ -20,27 +20,24 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   const [checkboxState, setCheckboxState] = useState<boolean>(false);
   const [pages, setPages] = useState<number>(0);
   const [languages, setLanguages] = useState<number>(0);
-  const [additionalCost, setAdditionalCost] = useState<number>(0); // Estado para el costo adicional
+  const [additionalCost, setAdditionalCost] = useState<number>(0);
   const totalContext = useContext(TotalContext);
 
   if (!totalContext) {
     throw new Error('Card debe estar dentro de un TotalProvider');
   }
   const {
-    total,
     setTotal,
-    selectedCards,
+
     setSelectedCards,
     setPaginas,
     setLenguajes,
   } = totalContext;
 
-  // Calcula el costo adicional cada vez que cambian páginas o lenguajes
   useEffect(() => {
     const newAdditionalCost = (pages + languages) * 30;
     setAdditionalCost(newAdditionalCost);
 
-    // Si el checkbox está activo, actualiza el total general
     if (checkboxState) {
       setTotal((prevTotal) => prevTotal + newAdditionalCost - additionalCost);
     }
@@ -68,12 +65,12 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   };
 
   const handlePagesChange = (value: number) => {
-    setPages(value); // Actualiza páginas
+    setPages(value);
     setPaginas(value);
   };
 
   const handleLanguagesChange = (value: number) => {
-    setLanguages(value); // Actualiza lenguajes
+    setLanguages(value);
     setLenguajes(value);
   };
 
