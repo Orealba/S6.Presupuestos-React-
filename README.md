@@ -1,50 +1,56 @@
-# React + TypeScript + Vite
+# Calculadora de Presupuestos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web desarrollada con React + TypeScript que permite a los usuarios crear presupuestos personalizados.
 
-Currently, two official plugins are available:
+## 🚀 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Navegación entre dos páginas principales
+- Calculadora interactiva de presupuestos
+- Sistema de tarjetas para selección de servicios
+- Formulario para datos del cliente
+- Múltiples presupuestos guardables
+- Popups informativos para mejor experiencia de usuario
+- Cálculo dinámico del total usando Context
 
-## Expanding the ESLint configuration
+## 💻 Tecnologías Utilizadas que hay que instalar
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
+- Flowbite
+- Context API de React
 
-- Configure the top-level `parserOptions` property like this:
+## 📋 Estructura de la Aplicación
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Página Principal
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Punto de entrada a la aplicación
+- Navegación hacia la calculadora
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Página Calculadora
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Componentes múltiples para la interfaz:
+  - Navbar: Barra de navegación
+  - Cards: Tarjetas de servicios seleccionables
+  - PrecioTotal: Muestra el total calculado
+  - GenerarPresupuestoCard: Formulario para datos del cliente
+  - DatosPresupuestoCard: Muestra los presupuestos generados
+
+### Gestión de Estado
+
+- Context API para manejar:
+  - Total del presupuesto
+  - Información de las tarjetas seleccionadas
+  - Estado global de la aplicación
+
+## 🔧 Características Adicionales
+
+- Validación de formularios
+- Popups informativos para mejor UX
+- Capacidad de generar múltiples presupuestos
+
+## 🎨 Estilos
+
+- Implementado con Tailwind CSS
+- Componentes de Flowbite para UI consistente
