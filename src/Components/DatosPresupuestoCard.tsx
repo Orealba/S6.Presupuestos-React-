@@ -50,7 +50,11 @@ function DatosPresupuestoCard({
                       <li
                         key={card.id}
                         className="text-gray-700">
-                        {card.title} - {card.price}€
+                        {card.title === 'Web'
+                          ? // Para Web, mostrar páginas y lenguajes sin el precio
+                            `Web (${presupuesto.paginas} páginas, ${presupuesto.lenguajes} lenguajes)`
+                          : // Para otros servicios, solo el título
+                            card.title}
                       </li>
                     ))}
                   </ul>

@@ -25,7 +25,14 @@ export const Card: React.FunctionComponent<CardsProps> = ({
   if (!totalContext) {
     throw new Error('Card debe estar dentro de un TotalProvider');
   }
-  const { total, setTotal, selectedCards, setSelectedCards } = totalContext;
+  const {
+    total,
+    setTotal,
+    selectedCards,
+    setSelectedCards,
+    setPaginas,
+    setLenguajes,
+  } = totalContext;
 
   // Calcula el costo adicional cada vez que cambian páginas o lenguajes
   useEffect(() => {
@@ -50,15 +57,23 @@ export const Card: React.FunctionComponent<CardsProps> = ({
       setSelectedCards((prevCards) =>
         prevCards.filter((card) => card.id !== id),
       );
+      if (id === 3) {
+        setPages(0);
+        setLanguages(0);
+        setPaginas(0);
+        setLenguajes(0);
+      }
     }
   };
 
   const handlePagesChange = (value: number) => {
     setPages(value); // Actualiza páginas
+    setPaginas(value);
   };
 
   const handleLanguagesChange = (value: number) => {
     setLanguages(value); // Actualiza lenguajes
+    setLenguajes(value);
   };
 
   return (

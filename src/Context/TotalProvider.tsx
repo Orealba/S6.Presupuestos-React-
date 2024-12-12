@@ -13,9 +13,15 @@ type FormData = {
   email: string;
 };
 type PresupuestoData = {
-  formData: FormData;
+  formData: {
+    nombre: string;
+    telefono: string;
+    email: string;
+  };
   selectedCards: CardType[];
   total: number;
+  paginas: number; // Nuevo
+  lenguajes: number; // Nuevo
 };
 
 type TotalContextType = {
@@ -25,6 +31,10 @@ type TotalContextType = {
   setSelectedCards: React.Dispatch<React.SetStateAction<CardType[]>>;
   savedPresupuestos: PresupuestoData[];
   savePresupuesto: (presupuesto: PresupuestoData) => void;
+  paginas: number; // Nuevo
+  lenguajes: number; // Nuevo
+  setPaginas: React.Dispatch<React.SetStateAction<number>>; // Nuevo
+  setLenguajes: React.Dispatch<React.SetStateAction<number>>; // Nuevo
 };
 
 // Creación del contexto
@@ -39,15 +49,13 @@ const TotalProvider: React.FC<TotalProviderProps> = ({ children }) => {
   const [total, setTotal] = useState<number>(0);
   const [selectedCards, setSelectedCards] = useState<CardType[]>([]);
   const [savedPresupuestos, setSavedPresupuestos] = useState<PresupuestoData[]>(
-    () => {
-      const saved = localStorage.getItem('presupuestos');
-      return saved ? JSON.parse(saved) : [];
-    },
+    [],
   );
+  const [paginas, setPaginas] = useState<number>(0); // Nuevo
+  const [lenguajes, setLenguajes] = useState<number>(0); // Nuevo
+
   const savePresupuesto = (presupuesto: PresupuestoData) => {
-    const newPresupuestos = [...savedPresupuestos, presupuesto];
-    setSavedPresupuestos(newPresupuestos);
-    localStorage.setItem('presupuestos', JSON.stringify(newPresupuestos));
+    setSavedPresupuestos([...savedPresupuestos, presupuesto]);
   };
 
   return (
@@ -59,6 +67,10 @@ const TotalProvider: React.FC<TotalProviderProps> = ({ children }) => {
         setSelectedCards,
         savedPresupuestos,
         savePresupuesto,
+        paginas, // Nuevo
+        lenguajes, // Nuevo
+        setPaginas, // Nuevo
+        setLenguajes, // Nuevo
       }}>
       {children}
     </TotalContext.Provider>

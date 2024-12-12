@@ -33,24 +33,19 @@ function GenerarPresupuestoCard({
     e.preventDefault();
 
     if (totalContext) {
-      // Crear el objeto de presupuesto
       const presupuestoData = {
         formData,
         selectedCards: totalContext.selectedCards,
         total: totalContext.total,
+        paginas: totalContext.paginas,
+        lenguajes: totalContext.lenguajes,
       };
 
-      // Guardar el presupuesto
       totalContext.savePresupuesto(presupuestoData);
-
-      // Llamar al callback
       onSubmitPresupuesto(formData);
-
-      // Limpiar el formulario
       setFormData(initialFormState);
     }
   };
-
   return (
     <div className="container bg-white border border-gray-200 rounded-lg shadow-xl generar-presupuestos-box-styles">
       <h4 className="text-gray-900 font-bold text-xl generar-presupuestos-box-styles-title">
