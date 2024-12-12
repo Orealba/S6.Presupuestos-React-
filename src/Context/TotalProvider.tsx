@@ -7,11 +7,24 @@ type CardType = {
   price: number;
 };
 
+type FormData = {
+  nombre: string;
+  telefono: string;
+  email: string;
+};
+type PresupuestoData = {
+  formData: FormData;
+  selectedCards: CardType[];
+  total: number;
+};
+
 type TotalContextType = {
   total: number;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   selectedCards: CardType[];
   setSelectedCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+  savedPresupuestos: PresupuestoData[];
+  savePresupuesto: (presupuesto: PresupuestoData) => void;
 };
 
 // Creación del contexto
@@ -25,10 +38,28 @@ type TotalProviderProps = {
 const TotalProvider: React.FC<TotalProviderProps> = ({ children }) => {
   const [total, setTotal] = useState<number>(0);
   const [selectedCards, setSelectedCards] = useState<CardType[]>([]);
+  const [savedPresupuestos, setSavedPresupuestos] = useState<PresupuestoData[]>(
+    () => {
+      const saved = localStorage.getItem('presupuestos');
+      return saved ? JSON.parse(saved) : [];
+    },
+  );
+  const savePresupuesto = (presupuesto: PresupuestoData) => {
+    const newPresupuestos = [...savedPresupuestos, presupuesto];
+    setSavedPresupuestos(newPresupuestos);
+    localStorage.setItem('presupuestos', JSON.stringify(newPresupuestos));
+  };
 
   return (
     <TotalContext.Provider
-      value={{ total, setTotal, selectedCards, setSelectedCards }}>
+      value={{
+        total,
+        setTotal,
+        selectedCards,
+        setSelectedCards,
+        savedPresupuestos,
+        savePresupuesto,
+      }}>
       {children}
     </TotalContext.Provider>
   );

@@ -1,11 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useContext } from 'react';
+import { TotalContext } from '../Context/TotalProvider';
 import './styles/GenerarPresupuestoCard.css';
 
-
 interface GenerarPresupuestoCardProps {
-  onSubmitPresupuesto: (data: FormData) => void; 
+  onSubmitPresupuesto: (data: FormData) => void;
 }
-
 
 interface FormData {
   nombre: string;
@@ -16,24 +15,40 @@ interface FormData {
 function GenerarPresupuestoCard({
   onSubmitPresupuesto,
 }: GenerarPresupuestoCardProps) {
+  const totalContext = useContext(TotalContext);
 
-  const [formData, setFormData] = useState<FormData>({
+  const initialFormState: FormData = {
     nombre: '',
     telefono: '',
     email: '',
-  });
+  };
+  const [formData, setFormData] = useState<FormData>(initialFormState);
 
- 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
-  
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
-    onSubmitPresupuesto(formData); 
-    console.log('Datos del formulario:', formData); // Mostrar en consola para verificar
+    e.preventDefault();
+
+    if (totalContext) {
+      // Crear el objeto de presupuesto
+      const presupuestoData = {
+        formData,
+        selectedCards: totalContext.selectedCards,
+        total: totalContext.total,
+      };
+
+      // Guardar el presupuesto
+      totalContext.savePresupuesto(presupuestoData);
+
+      // Llamar al callback
+      onSubmitPresupuesto(formData);
+
+      // Limpiar el formulario
+      setFormData(initialFormState);
+    }
   };
 
   return (
