@@ -2,6 +2,7 @@ import '../Components/styles/Card.css';
 import { ChangeEvent, useContext, useState, useEffect } from 'react';
 import { TotalContext } from '../Context/TotalProvider';
 import { InputNumber } from './InputNumber';
+import { InfoIcon } from './InfoIcon';
 
 type CardsProps = {
   id: number;
@@ -101,20 +102,31 @@ export const Card: React.FunctionComponent<CardsProps> = ({
       </div>
       {id === 3 && checkboxState && (
         <div className="mt-2 space-y-4">
-          <div className="flex justify-end">
-            <label
-              htmlFor="pages-input"
-              className="block text-sm font-bold text-gray-900 my-2 mr-2">
-              Número de páginas:
-            </label>
+          <div className="flex justify-end items-center">
+            <div className="flex items-center">
+              <InfoIcon
+                modalId="pagesModal"
+                title="Número de páginas"
+                description="Añade las páginas que necesites para realizar tu proyecto. El coste de cada página es de 30 €."
+              />
+              <label className="block text-sm font-bold text-gray-900 my-2 mr-2">
+                Número de páginas:
+              </label>
+            </div>
             <InputNumber onChange={handlePagesChange} />
           </div>
-          <div className="flex justify-end">
-            <label
-              htmlFor="languages-input"
-              className="block text-sm font-bold text-gray-900 my-2 mr-2">
-              Número de lenguajes:
-            </label>
+
+          <div className="flex justify-end items-center">
+            <div className="flex items-center">
+              <InfoIcon
+                modalId="languagesModal"
+                title="Número de lenguajes"
+                description="Añade los lenguajes de programación que necesites para realizar tu proyecto. El coste de cada lenguaje es de 30 €."
+              />
+              <label className="block text-sm font-bold text-gray-900 my-2 mr-2">
+                Número de lenguajes:
+              </label>
+            </div>
             <InputNumber onChange={handleLanguagesChange} />
           </div>
         </div>
